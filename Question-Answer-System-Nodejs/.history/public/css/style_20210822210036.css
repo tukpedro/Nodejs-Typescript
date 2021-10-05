@@ -1,0 +1,22 @@
+body {
+  background-color: rgb(206, 221, 221);
+}
+
+#Question-form {
+  margin-top: 5vh;
+}
+
+#quest-title, 
+#quest-title:visited  {
+  text-decoration: none;
+  color: rgb(0, 0, 0); 
+}
+
+#quest-title:hover {
+  text-decoration: none;
+  color: rgba(0, 17, 48, 0.719); 
+}
+
+#Question-q {
+  width: 100%;
+}

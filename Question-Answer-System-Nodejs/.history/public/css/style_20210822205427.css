@@ -1,0 +1,15 @@
+body {
+  background-color: rgb(206, 221, 221);
+}
+
+#Question-form {
+  margin-top: 5vh;
+}
+
+#quest-title {
+  text-decoration: none;
+}
+
+#Question-q {
+  width: 100%;
+}

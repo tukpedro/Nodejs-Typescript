@@ -1,0 +1,23 @@
+<%- include ('partials/header') %>
+<body>
+  <%- include ('partials/navbar') %>
+
+  <div class="container">
+    <hr />
+    <h1><%= question.title %></h1>
+    <h5><%= question.description %></h5>
+    <hr />
+    <form>
+      <h3>Answer the question</h3>
+      <br>
+      <textarea
+        placeholder="Type your answer here"
+        class="form-control"
+        name="body"
+      ></textarea>
+      <br>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</body>
+<%- include ('partials/footer') %>

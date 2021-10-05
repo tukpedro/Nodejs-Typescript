@@ -1,0 +1,12 @@
+<%- include ('partials/header') %>
+<body>
+  <%- include ('partials/navbar') %>
+  
+  <div class="container">
+    <% questions.forEach(question => { %>
+        <h3><%= question.title %></h3>
+        <p><%= question.description %></p>
+    <% }); %>
+  </div>
+</body>
+<%- include ('partials/footer') %>

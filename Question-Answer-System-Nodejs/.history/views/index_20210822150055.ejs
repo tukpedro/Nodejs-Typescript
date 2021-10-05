@@ -1,0 +1,24 @@
+<%- include ('partials/header') %>
+<body>
+  <%- include ('partials/navbar') %>
+  
+  <div class="container">
+    <% questions.forEach(question => { %>
+      <hr>
+      <div class="card">
+        <div class="card-body">
+          <h5><%= question.title %></h5>
+          <p><%= question.description %></p>
+        </div>
+        <div class="card-footer">
+          <button class="btn btn-primary">Answer</button>
+        </div>
+      </div>
+      <br>
+    <% }); %>
+    <hr>
+    <a href="/Question" class="btn btn-dark" id="Question-q">Question a question</a>
+    <hr>
+  </div>
+</body>
+<%- include ('partials/footer') %>
