@@ -1,8 +1,10 @@
 import 'reflect-metadata';
 import express, { Request, Response, NextFunction } from 'express';
+import 'express-async-errors';
 import cors from 'cors';
 import routes from './routes/index.routes';
 import AppError from '@shared/errors/AppError';
+import '@shared/typeorm';
 
 const app = express();
 
@@ -18,8 +20,8 @@ app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
   }
 
   return res.status(500).json({
-    status: 'error',
-    message: 'Internal Server',
+    status: 'Error',
+    message: 'Internal Server Error',
   });
 });
 
