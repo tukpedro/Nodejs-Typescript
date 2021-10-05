@@ -14,7 +14,7 @@ export default class ProductsController {
   }
 
   public async show(req: Request, res: Response): Promise<Response> {
-    const { id } = req.body;
+    const { id } = req.params;
 
     const showProduct = new ShowProductService();
 
@@ -35,7 +35,7 @@ export default class ProductsController {
 
   public async update(req: Request, res: Response): Promise<Response> {
     const { name, price, quantity } = req.body;
-    const { id } = req.body;
+    const { id } = req.params;
 
     const updateProduct = new UpdateProductService();
 
@@ -45,7 +45,7 @@ export default class ProductsController {
   }
 
   public async delete(req: Request, res: Response): Promise<Response> {
-    const { id } = req.body;
+    const { id } = req.params;
 
     const deleteProduct = new DeleteProductService();
 
