@@ -1,4 +1,4 @@
-import { Request, response, Response } from 'express';
+import { Request, Response } from 'express';
 import CreateProductService from '../services/CreateProductService';
 import DeleteProductService from '../services/DeleteProductService';
 import ListProductService from '../services/ListProductService';
