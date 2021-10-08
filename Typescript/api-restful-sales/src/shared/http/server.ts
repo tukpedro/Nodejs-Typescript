@@ -28,5 +28,5 @@ app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
 });
 
 app.listen(8888, () => {
-  console.log('Server Running! 😎');
+  console.log('✨ Server Running! ✨');
 });
