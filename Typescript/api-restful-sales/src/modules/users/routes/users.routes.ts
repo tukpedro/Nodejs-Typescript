@@ -6,11 +6,12 @@ import isAuthenticated from '@shared/http/middlewares/isAuthenticated';
 const usersRouter = Router();
 const usersController = new UsersController();
 
-usersRouter.get('/', isAuthenticated, usersController.index);
+usersRouter.use(isAuthenticated);
+
+usersRouter.get('/', usersController.index);
 
 usersRouter.post(
   '/',
-  isAuthenticated,
   celebrate({
     [Segments.BODY]: {
       name: Joi.string().required(),
@@ -23,7 +24,6 @@ usersRouter.post(
 
 usersRouter.put(
   '/:id',
-  isAuthenticated,
   celebrate({
     [Segments.PARAMS]: {
       id: Joi.string().uuid().required(),
@@ -39,7 +39,6 @@ usersRouter.put(
 
 usersRouter.delete(
   '/:id',
-  isAuthenticated,
   celebrate({
     [Segments.PARAMS]: {
       id: Joi.string().uuid().required(),
