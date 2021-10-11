@@ -6,6 +6,7 @@ const logRoutes = MainController.logRoutes;
 
 router.use(logRoutes);
 
-router.get('/', MainController.index);
+router.post('/account', MainController.createAccount);
+router.get('/statement', MainController.getStatement);
 
 export default router;
