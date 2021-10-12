@@ -12,6 +12,20 @@ export default {
     return next();
   },
 
+  verifyCpf(req: Request, res: Response, next: NextFunction): any {
+    const { cpf } = req.headers;
+
+    const customer = customers.find(customer => customer.cpf === cpf);
+
+    if (!customer) {
+      return res.json({
+        error: 'CPF not found',
+      });
+    }
+
+    return next();
+  },
+
   async createAccount(req: Request, res: Response): Promise<Response> {
     const { cpf, name } = req.body;
 
@@ -36,16 +50,31 @@ export default {
   },
 
   async getStatement(req: Request, res: Response): Promise<Response> {
-    const { cpf } = req.body;
+    const { customer } = req;
+    return res.json(customer.statement);
+  },
+
+  async deposit(req: Request, res: Response): Promise<Response> {
+    const { cpf } = req.headers;
+    const { description, amount } = req.body;
 
     const customer = customers.find(customer => customer.cpf === cpf);
 
-    if (customer) {
-      return res.json(customer.statement);
+    if (!customer) {
+      return res.json({
+        error: 'CPF not found',
+      });
     }
 
-    return res.json({
-      error: 'CPF not found',
-    });
+    const statementOperation = {
+      description,
+      amount,
+      created_at: new Date(),
+      type: 'credit',
+    };
+
+    customer.statement.push(statementOperation);
+
+    return res.json(customer.statement);
   },
 };
