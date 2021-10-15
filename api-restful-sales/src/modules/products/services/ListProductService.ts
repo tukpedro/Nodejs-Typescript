@@ -8,6 +8,8 @@ class ListProductService {
 
     const products = productsRepository.find();
 
+    console.log(await products);
+
     return products;
   }
 }
