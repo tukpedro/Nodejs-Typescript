@@ -1,31 +1,55 @@
 import AppError from '@shared/errors/AppError';
-import { hash } from 'bcryptjs';
+import { compare, hash } from 'bcryptjs';
 import { getCustomRepository } from 'typeorm';
 import User from '../typeorm/entities/User';
 import UsersRepository from '../typeorm/repositories/UsersRepository';
 
 interface IRequest {
-  id: string;
+  user_id: string;
   name: string;
   email: string;
-  password: string;
+  old_password?: string;
+  password?: string;
 }
 
 class UpdateUserService {
-  public async execute({ id, name, email, password }: IRequest): Promise<User> {
+  public async execute({
+    user_id,
+    name,
+    email,
+    password,
+    old_password,
+  }: IRequest): Promise<User> {
     const usersRepository = getCustomRepository(UsersRepository);
 
-    const user = await usersRepository.findOne(id);
+    const user = await usersRepository.findOne(user_id);
 
     if (!user) {
-      throw new AppError('User not found');
+      throw new AppError('User not found!');
     }
 
-    const hashPassword = await hash(password, 4);
+    const userUpdateEmail = await usersRepository.findByEmail(email);
+
+    if (userUpdateEmail && userUpdateEmail.id !== user_id) {
+      throw new AppError('Email already exists!');
+    }
+
+    if (password && !old_password) {
+      throw new AppError('Current password is required!');
+    }
+
+    if (password && old_password) {
+      const checkOldPassword = await compare(old_password, user.password);
+
+      if (!checkOldPassword) {
+        throw new AppError('Current password is incorrect!');
+      }
+      const hashPassword = await hash(password, 4);
+      user.password = hashPassword;
+    }
 
     user.name = name;
     user.email = email;
-    user.password = hashPassword;
 
     await usersRepository.save(user);
 

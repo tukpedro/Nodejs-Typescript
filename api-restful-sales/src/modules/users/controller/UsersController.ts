@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import CreateUserService from '../services/CreateUserService';
 import DeleteUserService from '../services/DeleteUserService';
 import ListUserService from '../services/ListUserService';
+import ShowUserService from '../services/ShowUserService';
 import UpdateUserService from '../services/UpdateUserService';
 
 export default class UsersController {
@@ -9,6 +10,15 @@ export default class UsersController {
     const listUser = new ListUserService();
 
     const user = await listUser.execute();
+
+    return res.json(user);
+  }
+
+  public async show(req: Request, res: Response): Promise<Response> {
+    const showUser = new ShowUserService();
+    const user_id = req.user.id;
+
+    const user = await showUser.execute({ user_id });
 
     return res.json(user);
   }
@@ -28,16 +38,17 @@ export default class UsersController {
   }
 
   public async update(req: Request, res: Response): Promise<Response> {
-    const { name, email, password } = req.body;
-    const { id } = req.params;
+    const user_id = req.user.id;
+    const { name, email, old_password, password } = req.body;
 
     const updateUser = new UpdateUserService();
 
     const user = await updateUser.execute({
-      id,
+      user_id,
       name,
       email,
       password,
+      old_password,
     });
 
     return res.json(user);

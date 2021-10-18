@@ -13,6 +13,8 @@ const upload = multer(uploadConfig);
 
 usersRouter.get('/', usersController.index);
 
+usersRouter.get('/profile', usersController.show);
+
 usersRouter.post(
   '/',
   celebrate({
@@ -26,15 +28,19 @@ usersRouter.post(
 );
 
 usersRouter.put(
-  '/:id',
+  '/profile',
   celebrate({
-    [Segments.PARAMS]: {
-      id: Joi.string().uuid().required(),
-    },
     [Segments.BODY]: {
       name: Joi.string().required(),
       email: Joi.string().required(),
-      password: Joi.string().required(),
+      old_password: Joi.string(),
+      password: Joi.string().optional(),
+      password_confirmation: Joi.string()
+        .valid(Joi.ref('password'))
+        .when('password', {
+          is: Joi.exist(),
+          then: Joi.required(),
+        }),
     },
   }),
   usersController.update,

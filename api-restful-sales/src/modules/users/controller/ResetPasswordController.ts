@@ -3,13 +3,13 @@ import ResetPasswordService from '../services/ResetPasswordService';
 
 export default class ResetPasswordController {
   public async create(req: Request, res: Response): Promise<Response> {
-    const { password, token } = req.body;
+    const { token, password } = req.body;
 
     const resetPassword = new ResetPasswordService();
 
     await resetPassword.execute({
-      password,
       token,
+      password,
     });
 
     return res.json({
