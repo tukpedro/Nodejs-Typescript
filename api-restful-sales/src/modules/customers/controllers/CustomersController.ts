@@ -4,7 +4,7 @@ import DeleteCustomerService from '../services/DeleteCustomerService';
 import ListCustomerService from '../services/ListCustomerService';
 import ShowCustomerService from '../services/ShowCustomerService';
 import UpdateCustomerService from '../services/UpdateCustomerService';
-
+// teste
 export default class CustomersController {
   public async index(req: Request, res: Response): Promise<Response> {
     const listCustomers = new ListCustomerService();
