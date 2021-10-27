@@ -6,7 +6,7 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import Customer from '@modules/customers/typeorm/entities/Customer';
+import Customer from '../../../customers/typeorm/entities/Customer';
 import OrdersProducts from './OrdersProducts';
 
 @Entity('orders')
