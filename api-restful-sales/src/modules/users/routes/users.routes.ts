@@ -30,7 +30,6 @@ usersRouter.get('/', usersController.index);
 
 usersRouter.get('/profile', usersController.show);
 
-
 usersRouter.put(
   '/profile',
   celebrate({
