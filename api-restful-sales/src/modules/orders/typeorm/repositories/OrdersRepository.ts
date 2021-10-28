@@ -15,6 +15,14 @@ interface IRequest {
 
 @EntityRepository(Order) // Estou declarando a classe Order como um repositorio
 export class OrdersRepository extends Repository<Order> {
+  public async findAll(): Promise<Order[]> {
+    const orders = this.find({
+      relations: ['order_products', 'customer'],
+    });
+
+    return orders;
+  }
+
   public async findById(id: string): Promise<Order | undefined> {
     const order = this.findOne(id, {
       relations: ['order_products', 'customer'],
