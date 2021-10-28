@@ -1,5 +1,4 @@
 import Customer from '@modules/customers/typeorm/entities/Customer';
-import { string } from 'joi';
 import { EntityRepository, Repository } from 'typeorm';
 import Order from '../entities/Order';
 

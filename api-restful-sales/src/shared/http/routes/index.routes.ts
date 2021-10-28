@@ -5,6 +5,7 @@ import sessionsRouter from '@modules/users/routes/sessions.routes';
 import isAuthenticated from '../middlewares/isAuthenticated';
 import passwordRouter from '@modules/users/routes/password.routes';
 import customersRouter from '@modules/customers/routes/customers.routes';
+import ordersRouter from '@modules/orders/routes/orders.routes';
 
 const routes = Router();
 
@@ -14,5 +15,6 @@ routes.use('/users', usersRouter);
 routes.use(isAuthenticated);
 routes.use('/products', productsRouter);
 routes.use('/customers', customersRouter);
+routes.use('/orders', ordersRouter);
 
 export default routes;
