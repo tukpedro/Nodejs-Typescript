@@ -1,17 +1,20 @@
-import 'reflect-metadata';
-import express, { Request, Response, NextFunction } from 'express';
-import 'express-async-errors';
+import 'dotenv/config';
 import cors from 'cors';
+import '@shared/typeorm';
+import 'reflect-metadata';
+import 'express-async-errors';
 import { errors } from 'celebrate';
+import uploadConfig from '@config/upload';
 import routes from './routes/index.routes';
 import AppError from '@shared/errors/AppError';
-import '@shared/typeorm';
-import uploadConfig from '@config/upload';
+import { pagination } from 'typeorm-pagination';
+import express, { Request, Response, NextFunction } from 'express';
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use(pagination);
 app.use('/files', express.static(uploadConfig.directory));
 app.use(routes);
 app.use(errors());
@@ -29,6 +32,6 @@ app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
   });
 });
 
-app.listen(8888, () => {
-  console.log('✨ Server Running! ✨');
+app.listen(process.env.PORT, () => {
+  console.log(`✨ Server running on port ${process.env.PORT} ✨`);
 });
