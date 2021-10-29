@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { classToClass } from 'class-transformer';
 import CreateSessionService from '../services/CreateSessionService';
 
 export default class SessionController {
@@ -12,6 +13,6 @@ export default class SessionController {
       password,
     });
 
-    return res.json(user);
+    return res.json(classToClass(user));
   }
 }
