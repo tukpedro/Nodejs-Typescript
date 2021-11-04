@@ -1,42 +1,44 @@
-import { getCustomRepository } from 'typeorm';
-import Customer from '../typeorm/entities/Customer';
-import CustomersRepository from '../typeorm/repositories/CustomersRepository';
-
-class ListCustomerService {
-  public async execute(): Promise<Customer[]> {
-    const customersRepository = getCustomRepository(CustomersRepository);
-
-    const customers = customersRepository.find();
-
-    return customers;
-  }
-}
-
-export default ListCustomerService;
-
 // import { getCustomRepository } from 'typeorm';
 // import Customer from '../typeorm/entities/Customer';
 // import CustomersRepository from '../typeorm/repositories/CustomersRepository';
 
-// interface IPaginateCustomer {
-//   from: number;
-//   to: number;
-//   per_page: number;
-//   total: number;
-//   current_page: number;
-//   prev_page: number | null;
-//   next_page: number | null;
-//   data: Customer[];
-// }
-
 // class ListCustomerService {
-//   public async execute(): Promise<IPaginateCustomer> {
+//   public async execute(): Promise<Customer[]> {
 //     const customersRepository = getCustomRepository(CustomersRepository);
 
-//     const customers = await customersRepository.createQueryBuilder().paginate();
+//     const customers = customersRepository.find();
 
-//     return customers as IPaginateCustomer;
+//     return customers;
 //   }
 // }
 
 // export default ListCustomerService;
+
+import { getCustomRepository } from 'typeorm';
+
+import Customer from '../typeorm/entities/Customer';
+
+import CustomersRepository from '../typeorm/repositories/CustomersRepository';
+
+interface IPaginateCustomer {
+  from: number;
+  to: number;
+  per_page: number;
+  total: number;
+  current_page: number;
+  prev_page: number | null;
+  next_page: number | null;
+  data: Customer[];
+}
+
+class ListCustomerService {
+  public async execute(): Promise<IPaginateCustomer> {
+    const customersRepository = getCustomRepository(CustomersRepository);
+
+    const customers = await customersRepository.createQueryBuilder().paginate();
+
+    return customers as unknown as IPaginateCustomer;
+  }
+}
+
+export default ListCustomerService;
