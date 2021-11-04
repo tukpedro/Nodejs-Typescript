@@ -37,7 +37,7 @@ class ListCustomerService {
 
     const customers = await customersRepository.createQueryBuilder().paginate();
 
-    return customers as unknown as IPaginateCustomer;
+    return customers as IPaginateCustomer;
   }
 }
 
