@@ -10,7 +10,7 @@ services:
             - .:/home/node/app
         depends_on:
             - db
-            # - redis
+            - redis
 
     db:
         build: .docker/postgres
@@ -25,11 +25,11 @@ services:
             - POSTGRES_PASSWORD=docker
             - POSTGRES_DB=apisales
 
-    # redis:
-    #     image: `bitnami/redis:latest
-    #     container_name: apisales-redis
-    #     environment:
-    #         - ALLOW_EMPTY_PASSWORD=yes
+    redis:
+        image: `bitnami/redis:latest
+        container_name: apisales-redis
+        environment:
+            - ALLOW_EMPTY_PASSWORD=yes
 
     pgadmin:
         image: dpage/pgadmin4
