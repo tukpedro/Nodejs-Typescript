@@ -1,6 +1,6 @@
 import 'dotenv/config';
 import cors from 'cors';
-import '@shared/typeorm';
+import '@shared/infra/typeorm';
 import 'reflect-metadata';
 import 'express-async-errors';
 import { errors } from 'celebrate';
