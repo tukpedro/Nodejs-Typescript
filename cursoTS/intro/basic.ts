@@ -1,2 +1,2 @@
 const a: string = "Teste";
-console.log(a);
+console.log(a + "krl");

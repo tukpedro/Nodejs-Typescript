@@ -4,10 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node-dev -r tsconfig-paths/register --inspect --ignore-watch node_modules intro/basic.ts"
+    "dev": "ts-node-dev -r tsconfig-paths/register --inspect --ignore-watch node_modules intro/basic.ts",
+    "start": "live-server"
   },
   "devDependencies": {
     "@types/node": "^16.11.10",
+    "live-server": "^1.2.1",
     "ts-node": "^10.4.0",
     "ts-node-dev": "^1.1.8",
     "tsconfig-paths": "^3.12.0",
