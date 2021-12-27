@@ -1,4 +1,7 @@
 {
+   "scripts": {
+    "dev": "ts-node-dev -r tsconfig-paths/register --inspect --ignore-watch node_modules intro/basic.ts"
+   },
   "devDependencies": {
     "@types/node": "^16.11.10",
     "ts-node-dev": "^1.1.8",
