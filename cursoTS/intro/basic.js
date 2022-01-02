@@ -1,3 +1,3 @@
 "use strict";
 const a = "Teste";
-console.log(a + "krl");
+console.log(a + " maldito");
