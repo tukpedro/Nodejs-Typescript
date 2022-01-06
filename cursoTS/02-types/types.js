@@ -128,3 +128,4 @@ employees.push(createEmployee(['John', 'Mellon'], 9));
 employees.push(createEmployee(['Mary', 'James'], 7));
 console.log(employees);
 employees.push(createEmployee(['Jin', 'Marv'], 59));
+//# sourceMappingURL=types.js.map
