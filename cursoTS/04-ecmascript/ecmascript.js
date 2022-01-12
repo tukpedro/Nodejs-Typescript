@@ -36,9 +36,70 @@ saudacao();
 const falarCom = (pessoa) => console.log('Ola ' + pessoa);
 falarCom('João');
 // this
-function normalComThis() {
-    console.log(this);
+// function normalComThis() {
+//   console.log(this);
+// }
+// const arrowComThis = normalComThis.bind('teste');
+// arrowComThis();
+const contagemRegressiva = (inicio = 5) => {
+    console.log(inicio);
+    while (inicio > 0) {
+        inicio--;
+        console.log(inicio);
+    }
+};
+contagemRegressiva(2);
+// Rest Spread
+const nums = [1, 131, -5, 28, 73, 1034];
+console.log(Math.max(...nums));
+console.log(Math.min(...nums));
+const turmaA = ['Pedro', 'João', 'Fernada'];
+const turmaB = ['José', 'Cassio', 'Jonas', ...turmaA];
+console.log(turmaA);
+console.log(turmaB);
+const dobro = (valor) => valor * 2;
+console.log(dobro(10));
+const dizerOla = (nome = 'Pessoa') => {
+    console.log('Ola, ' + nome);
+};
+dizerOla();
+dizerOla('Anna');
+const nums2 = [-3, 33, 38, 5];
+console.log(Math.min(...nums2));
+const nums3 = [-3, 33, 38, 5];
+const array = [55, 20];
+array.push(...nums3);
+console.log(array);
+const notas = [8.5, 6.3, 9.4];
+const [n1, n2, n3] = notas;
+console.log(n1, n2, n3);
+const cientista = { primeiroNome: 'Will', experiencia: 12 };
+const { primeiroNome: n, experiencia: e } = cientista;
+console.log(n);
+console.log(e);
+// Callback functions
+function wait(callback) {
+    setTimeout(() => {
+        callback('3s depois');
+    }, 3000);
 }
-const x = normalComThis.bind('teste');
-x();
+wait(function (result) {
+    console.log(result);
+});
+function waitPromise() {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve('4s depois');
+        }, 4000);
+    });
+}
+waitPromise().then(data => console.log(data));
+fetch('https://swapi.dev/api/people/1')
+    .then(res => res.json())
+    .then(char => char.films)
+    .then(films => {
+    films.forEach((film) => fetch(film)
+        .then(res => res.json())
+        .then(data => console.log(data)));
+});
 //# sourceMappingURL=ecmascript.js.map
