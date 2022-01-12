@@ -129,6 +129,13 @@ fetch('https://swapi.dev/api/people/1')
     films.forEach((film: any) =>
       fetch(film)
         .then(res => res.json())
-        .then(data => console.log(data)),
+        .then(film => film.characters)
+        .then(chars => {
+          chars.forEach((character: any) => {
+            fetch(character)
+              .then(res => res.json())
+              .then(character => console.log(character.name));
+          });
+        }),
     );
   });
