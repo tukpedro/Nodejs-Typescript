@@ -122,20 +122,26 @@ function waitPromise() {
 
 waitPromise().then(data => console.log(data));
 
-fetch('https://swapi.dev/api/people/1')
+// fetch('https://swapi.dev/api/people/1')
+//   .then(res => res.json())
+//   .then(char => char.films)
+//   .then(films => {
+//     films.forEach((film: any) =>
+//       fetch(film)
+//         .then(res => res.json())
+//         .then(film => film.characters)
+//         .then(chars => {
+//           chars.forEach((character: any) => {
+//             fetch(character)
+//               .then(res => res.json())
+//               .then(character => console.log(character.name));
+//           });
+//         }),
+//     );
+//   });
+
+fetch('https://game-of-thrones-quotes.herokuapp.com/v1/characters')
   .then(res => res.json())
-  .then(char => char.films)
-  .then(films => {
-    films.forEach((film: any) =>
-      fetch(film)
-        .then(res => res.json())
-        .then(film => film.characters)
-        .then(chars => {
-          chars.forEach((character: any) => {
-            fetch(character)
-              .then(res => res.json())
-              .then(character => console.log(character.name));
-          });
-        }),
-    );
+  .then(data => {
+    data.forEach((character: any) => console.log(character.slug));
   });
