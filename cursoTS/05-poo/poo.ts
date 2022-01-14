@@ -52,15 +52,15 @@ console.log(p1.presentation());
 console.log(p2.presentation());
 
 class Car {
-  private speed: number = 0;
+  public speed: number = 0;
 
   constructor(
     public factory: string,
     public model: string,
-    private maxSpeed: number = 200,
+    public maxSpeed: number = 200,
   ) {}
 
-  private speedModifier(delta: number): number {
+  protected speedModifier(delta: number): number {
     const newSpeed = this.speed + delta;
     const isValid = newSpeed >= 0 && newSpeed <= this.maxSpeed;
 
@@ -71,14 +71,99 @@ class Car {
   }
 
   public speedUp(): number {
-    return this.speedModifier(50);
+    return this.speedModifier(5);
   }
 
   public speedDown(): number {
-    return this.speedModifier(-50);
+    return this.speedModifier(-5);
   }
 }
 
 const march = new Car('Nissan', 'March', 195);
-Array(5).fill(0).forEach(() => console.log(march.speedUp()))
-Array(4).fill(0).forEach(() => console.log(march.speedDown()))
+while (march.speed < march.maxSpeed) console.log(march.speedUp());
+while (march.speed > 0) console.log(march.speedDown());
+// Array(5).fill(0).forEach(() => console.log(march.speedUp()))
+// Array(4).fill(0).forEach(() => console.log(march.speedDown()))
+
+class Ferrari extends Car {
+  constructor(model: string, maxSpeed: number) {
+    super('Ferrari', model, maxSpeed);
+  }
+
+  public speedUp(): number {
+    return this.speedModifier(25);
+  }
+
+  public speedDown(): number {
+    return this.speedModifier(-25);
+  }
+}
+const f40 = new Ferrari('F40', 360);
+console.log(f40);
+while (f40.speed < f40.maxSpeed) console.log(f40.speedUp());
+while (f40.speed > 0) console.log(f40.speedDown());
+
+// GETER and SETTER
+class Person {
+  private _age: number = 0;
+
+  get age(): number {
+    return this._age;
+  }
+
+  set age(value: number) {
+    if (value >= 0 && value <= 120) this._age = value;
+  }
+}
+
+const person1 = new Person();
+person1.age = 10;
+console.log(person1);
+
+// STATIC atributes and methods
+
+class Matematica {
+  static pi: number = 3.1416;
+
+  static areaCirc(r: number): number {
+    return this.pi * r * r;
+  }
+}
+
+// const m1 = new Matematica()
+// m1.pi = 3.14
+// console.log(m1.areaCirc(4))
+
+console.log(Matematica.areaCirc(4));
+
+// Abstract
+
+abstract class Calculo {
+  protected resultado: number = 0;
+
+  abstract execute(...nums: number[]): void;
+
+  getResultado(): number {
+    return this.resultado;
+  }
+}
+
+class Soma extends Calculo {
+  execute(...nums: number[]): void { 
+    this.resultado = nums.reduce((t, a) => t + a)
+  }
+}
+
+class Mult extends Calculo {
+  execute(...nums: number[]): void { 
+    this.resultado = nums.reduce((t, a) => t * a)
+  }
+}
+
+let c1 = new Soma
+c1.execute(6, 7, 8, 9)
+console.log(c1.getResultado())
+
+c1 = new Mult
+c1.execute(6, 7, 8, 9)
+console.log(c1.getResultado())
