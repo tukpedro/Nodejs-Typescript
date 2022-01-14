@@ -111,9 +111,7 @@ waitPromise().then(data => console.log(data));
 //         }),
 //     );
 //   });
-fetch('https://game-of-thrones-quotes.herokuapp.com/v1/characters')
+fetch('https://api.github.com/users/tukpedro/repos')
     .then(res => res.json())
-    .then(data => {
-    data.forEach((character) => console.log(character.slug));
-});
+    .then(data => data.forEach((repo) => console.log(repo.name ? repo.name : repo)));
 //# sourceMappingURL=ecmascript.js.map
